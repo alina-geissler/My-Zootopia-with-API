@@ -10,6 +10,10 @@ PLACEHOLDER_ANIMALS_INFO = '__REPLACE_ANIMALS_INFO__'
 
 
 def get_animal_by_user():
+    """
+    Ask user for animal the website should be about.
+    :return: name of the chosen animal (or a string with a single space to select all animals)
+    """
     animal = input("Enter a name of an animal (or leave blank for all animals available): ")
     if not animal or animal.count(" ") == len(animal):
         animal = ' '
@@ -17,13 +21,21 @@ def get_animal_by_user():
 
 
 def fetch_data(animal):
-    """ Makes a request to get the data from an API """
+    """
+    Make a request to fetch data from an API.
+    :param animal: animal to get information about
+    :return: received data in JSON format
+    """
     res = requests.get(REQUEST_URL + animal, headers=HEADERS)
     return res.json()
 
 
 def load_template(file_path):
-    """ Loads an HTML template """
+    """
+    Load an HTML template
+    :param file_path: source of the template
+    :return: HTML template
+    """
     with open(file_path, "r") as handle:
         return handle.read()
 
@@ -85,7 +97,7 @@ def select_skin_type(animals_info):
 def create_html_file(skin_type, animals_data):
     """
     Generate HTML file based on user choice.
-    :param animals_data:
+    :param animals_data: information to use for HTML file (data from API in JSON format)
     :param skin_type: type selected by user
     """
     template = load_template(TEMPLATE_PATH)
@@ -108,7 +120,7 @@ def create_html_file(skin_type, animals_data):
 
 def main():
     """
-    Execute the main program: greet user, get skin type input and generate HTML file accordingly.
+    Execute the main program: greet user, get animal name and skin type input and generate HTML file accordingly.
     """
     print("\nWelcome to your Animal Repository Generator!\n")
     print("Which animal should your website be about?")
