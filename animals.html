@@ -1,0 +1,303 @@
+<html>
+    <head>
+        <style>
+        @gray-darker:               #444444;
+        @gray-dark:                 #696969;
+        @gray:                      #999999;
+        @gray-light:                #cccccc;
+        @gray-lighter:              #ececec;
+        @gray-lightest:             lighten(@gray-lighter,4%);
+
+
+        html {
+          background-color: #ffe9e9;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 40pt;
+            font-weight: normal;
+        }
+
+        body {
+          font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          letter-spacing: 0;
+          padding: 1rem;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          -moz-font-feature-settings: "liga" on;
+          width: 900px;
+          margin: auto;
+        }
+
+        .cards {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .cards__item {
+          background-color: white;
+          border-radius: 0.25rem;
+          box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+          overflow: hidden;
+          padding: 1rem;
+          margin: 50px;
+        }
+
+        .card__title {
+          color: @gray-dark;
+          font-size: 1.25rem;
+          font-weight: 300;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+        }
+
+        .card__text {
+          flex: 1 1 auto;
+          font-size: 0.95rem;
+          line-height: 2;
+          margin-bottom: 1.25rem;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>My Animal Repository</h1>
+        <ul class="cards">
+            <li class="cards__item">
+<div class="card__title" style="margin: 20;">American Foxhound</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> North-America</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Type:</strong> Hound</li>
+<li><strong>Skin:</strong> Hair</li>
+<li><strong>Color:</strong> BlackWhiteTan</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Arctic Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Eurasia</li>
+<li><strong>Habitat:</strong> Polar forest regions</li>
+<li><strong>Diet:</strong> Carnivore</li>
+<li><strong>Type:</strong> Mammal</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> GreyBlackWhite</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Cross Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> North-America</li>
+<li><strong>Habitat:</strong> Forests, prairies, deserts, mountains, cities, suburbs, tundra, scrub, near rivers, farms</li>
+<li><strong>Diet:</strong> Carnivore</li>
+<li><strong>Type:</strong> mammal</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> RedBlackSilver</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Darwin’s fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> South-America</li>
+<li><strong>Habitat:</strong> Temperate rainforests, shrubland</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Type:</strong> Mammal</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> GreyRedBlack</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">English Foxhound</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Europe</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Skin:</strong> Hair</li>
+<li><strong>Color:</strong> BlackWhiteTanMulti-colored</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Fennec Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Africa</li>
+<li><strong>Habitat:</strong> Sandy and semi-arid desert</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> WhiteCreamSandy</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Africa</li>
+<li><strong>Habitat:</strong> Woodland areas and urban parks</li>
+<li><strong>Diet:</strong> Carnivore</li>
+<li><strong>Type:</strong> Mammal</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> BrownRedBlackTan</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Fox Snakes</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> North-America</li>
+<li><strong>Diet:</strong> Carnivore</li>
+<li><strong>Skin:</strong> Scales</li>
+<li><strong>Color:</strong> BrownGreyBeigeChestnut</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Fox Squirrel</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Central-America</li>
+<li><strong>Habitat:</strong> Leaf nests and tree dens</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Type:</strong> rodent</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> BrownGrey-Brown</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Fox Terrier</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Europe</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Skin:</strong> Hair</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Golden-Crowned Flying Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Asia</li>
+<li><strong>Habitat:</strong> Caves and forests</li>
+<li><strong>Diet:</strong> Herbivore</li>
+<li><strong>Skin:</strong> Hair</li>
+<li><strong>Color:</strong> BlackGold</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Gray Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Central-America</li>
+<li><strong>Habitat:</strong> Forests and plains</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Type:</strong> Mammal</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> GreyRedBlackWhite</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Kit Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Central-America</li>
+<li><strong>Habitat:</strong> desert, grasslands</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Type:</strong> mammal</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> GreyYellowBlackWhite</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Marble Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> North-America</li>
+<li><strong>Habitat:</strong> Human captivity</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Type:</strong> Mammal</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> BrownBlackWhite</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Red Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Africa</li>
+<li><strong>Habitat:</strong> Forests, grasslands, tundra, prairie, deserts, and mountains</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Skin:</strong> Hair</li>
+<li><strong>Color:</strong> BrownGreyRedBlackSilver</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Smooth Fox Terrier</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Europe</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Skin:</strong> Hair</li>
+<li><strong>Color:</strong> BrownBlackWhiteTan</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Tibetan Fox</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Asia</li>
+<li><strong>Habitat:</strong> Tibetan Plateau</li>
+<li><strong>Diet:</strong> Carnivore</li>
+<li><strong>Type:</strong> Mammal</li>
+<li><strong>Skin:</strong> Fur</li>
+<li><strong>Color:</strong> GreyTan</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Toy Fox Terrier</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> North-America</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Skin:</strong> Hair</li>
+<li><strong>Color:</strong> BlackWhiteTanChocolate</li>
+</ul>
+</div>
+</li>
+<li class="cards__item">
+<div class="card__title" style="margin: 20;">Wire Fox Terrier</div>
+<div class="card__text">
+<ul style="list-style-type:none;">
+<li><strong>Location:</strong> Europe</li>
+<li><strong>Diet:</strong> Omnivore</li>
+<li><strong>Skin:</strong> Hair</li>
+<li><strong>Color:</strong> BlackWhiteTan</li>
+</ul>
+</div>
+</li>
+
+        </ul>
+    </body>
+</html>

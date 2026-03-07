@@ -1,18 +1,23 @@
-import json
+import requests
 
-DATA_PATH = 'animals_data.json'
+REQUEST_URL = 'https://api.api-ninjas.com/v1/animals?name='
+API_KEY = 'TLMzRWI8qDdqzWLoa80ly8U3BBjXs5BzGny0m8Ud'
+HEADERS = {'X-Api-Key': API_KEY}
+
+animal_to_search_for = 'Fox'
+
 TEMPLATE_PATH = 'animals_template.html'
 OUTPUT_HTML_PATH = 'animals.html'
 PLACEHOLDER_ANIMALS_INFO = '__REPLACE_ANIMALS_INFO__'
 
 
-def load_data(file_path):
-    """ Loads a JSON file """
-    with open(file_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+def get_data(animal):
+    """ Makes a request to get the data from an API """
+    res = requests.get(REQUEST_URL + animal_to_search_for, headers=HEADERS)
+    return res.json()
 
 
-animals_data = load_data(DATA_PATH)
+animals_data = get_data(animal_to_search_for)
 
 
 def load_template(file_path):
