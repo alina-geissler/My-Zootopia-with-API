@@ -1,8 +1,4 @@
-import requests
-
-REQUEST_URL = 'https://api.api-ninjas.com/v1/animals?name='
-API_KEY = 'TLMzRWI8qDdqzWLoa80ly8U3BBjXs5BzGny0m8Ud'
-HEADERS = {'X-Api-Key': API_KEY}
+import data_fetcher
 
 TEMPLATE_PATH = 'animals_template.html'
 OUTPUT_HTML_PATH = 'animals.html'
@@ -18,16 +14,6 @@ def get_animal_by_user():
     if not animal or animal.count(" ") == len(animal):
         animal = ' '
     return animal
-
-
-def fetch_data(animal):
-    """
-    Make a request to fetch data from an API.
-    :param animal: animal to get information about
-    :return: received data in JSON format
-    """
-    res = requests.get(REQUEST_URL + animal, headers=HEADERS)
-    return res.json()
 
 
 def load_template(file_path):
@@ -134,7 +120,7 @@ def main():
     print("\nWelcome to your Animal Repository Generator!\n")
     print("Which animal should your website be about?")
     animal_input = get_animal_by_user()
-    animals_data = fetch_data(animal_input)
+    animals_data = data_fetcher.fetch_data(animal_input)
     if animals_data:
         print("\nPlease select the SKIN TYPE you want the animals on your website to have.")
         skin_type = select_skin_type(animals_data)
