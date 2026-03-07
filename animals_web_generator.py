@@ -4,29 +4,28 @@ REQUEST_URL = 'https://api.api-ninjas.com/v1/animals?name='
 API_KEY = 'TLMzRWI8qDdqzWLoa80ly8U3BBjXs5BzGny0m8Ud'
 HEADERS = {'X-Api-Key': API_KEY}
 
-animal_to_search_for = 'Fox'
-
 TEMPLATE_PATH = 'animals_template.html'
 OUTPUT_HTML_PATH = 'animals.html'
 PLACEHOLDER_ANIMALS_INFO = '__REPLACE_ANIMALS_INFO__'
 
 
-def get_data(animal):
+def get_animal_by_user():
+    animal = input("Enter a name of an animal (or leave blank for all animals available): ")
+    if not animal or animal.count(" ") == len(animal):
+        animal = ' '
+    return animal
+
+
+def fetch_data(animal):
     """ Makes a request to get the data from an API """
-    res = requests.get(REQUEST_URL + animal_to_search_for, headers=HEADERS)
+    res = requests.get(REQUEST_URL + animal, headers=HEADERS)
     return res.json()
-
-
-animals_data = get_data(animal_to_search_for)
 
 
 def load_template(file_path):
     """ Loads an HTML template """
     with open(file_path, "r") as handle:
         return handle.read()
-
-
-template = load_template(TEMPLATE_PATH)
 
 
 def serialize_animal(animal_obj):
@@ -83,11 +82,13 @@ def select_skin_type(animals_info):
             print("Please select an available type.")
 
 
-def create_html_file(skin_type):
+def create_html_file(skin_type, animals_data):
     """
     Generate HTML file based on user choice.
+    :param animals_data:
     :param skin_type: type selected by user
     """
+    template = load_template(TEMPLATE_PATH)
     if skin_type == "":
         output = ''
         for animal_obj in animals_data:
@@ -109,10 +110,13 @@ def main():
     """
     Execute the main program: greet user, get skin type input and generate HTML file accordingly.
     """
-    print("Welcome to your Animal Repository Generator!\n")
-    print("Please select the SKIN TYPE you want the animals on your website to have.")
+    print("\nWelcome to your Animal Repository Generator!\n")
+    print("Which animal should your website be about?")
+    animal_input = get_animal_by_user()
+    animals_data = fetch_data(animal_input)
+    print("\nPlease select the SKIN TYPE you want the animals on your website to have.")
     skin_type = select_skin_type(animals_data)
-    create_html_file(skin_type)
+    create_html_file(skin_type, animals_data)
     print("\nYour HTML file has been created!")
 
 
