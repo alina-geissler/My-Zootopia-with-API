@@ -94,28 +94,37 @@ def select_skin_type(animals_info):
             print("Please select an available type.")
 
 
-def create_html_file(skin_type, animals_data):
+def create_html_file(animal_name, skin_type, animals_data):
     """
     Generate HTML file based on user choice.
+    :param animal_name: animal the data is about
     :param animals_data: information to use for HTML file (data from API in JSON format)
     :param skin_type: type selected by user
     """
     template = load_template(TEMPLATE_PATH)
-    if skin_type == "":
+    if not animals_data:
         output = ''
-        for animal_obj in animals_data:
-            output += serialize_animal(animal_obj)
+        output += '<li class="cards__item">\n'
+        output += '<div class="card__title">OOOPS!</div>\n'
+        output += (f'<div class="card__text">The animal "{animal_name}" '
+                   'does not exist.<br>(or at least it has not yet been discovered...)\n')
         html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
-        with open(OUTPUT_HTML_PATH, "w") as handle:
-            handle.write(html_with_data)
     else:
-        output = ''
-        for animal_obj in animals_data:
-            if animal_obj.get("characteristics").get("skin_type") == skin_type:
+        if skin_type == "":
+            output = ''
+            for animal_obj in animals_data:
                 output += serialize_animal(animal_obj)
-        html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
-        with open(OUTPUT_HTML_PATH, "w") as handle:
-            handle.write(html_with_data)
+            html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
+            with open(OUTPUT_HTML_PATH, "w") as handle:
+                handle.write(html_with_data)
+        else:
+            output = ''
+            for animal_obj in animals_data:
+                if animal_obj.get("characteristics").get("skin_type") == skin_type:
+                    output += serialize_animal(animal_obj)
+            html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
+    with open(OUTPUT_HTML_PATH, "w") as handle:
+        handle.write(html_with_data)
 
 
 def main():
@@ -126,9 +135,13 @@ def main():
     print("Which animal should your website be about?")
     animal_input = get_animal_by_user()
     animals_data = fetch_data(animal_input)
-    print("\nPlease select the SKIN TYPE you want the animals on your website to have.")
-    skin_type = select_skin_type(animals_data)
-    create_html_file(skin_type, animals_data)
+    if animals_data:
+        print("\nPlease select the SKIN TYPE you want the animals on your website to have.")
+        skin_type = select_skin_type(animals_data)
+    else:
+        print(f"The animal '{animal_input}' doesn't exist.")
+        skin_type = ""
+    create_html_file(animal_input, skin_type, animals_data)
     print("\nYour HTML file has been created!")
 
 
