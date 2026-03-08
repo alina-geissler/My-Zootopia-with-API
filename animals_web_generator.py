@@ -94,21 +94,17 @@ def create_html_file(animal_name, skin_type, animals_data):
         output += '<div class="card__title">OOOPS!</div>\n'
         output += (f'<div class="card__text">The animal "{animal_name}" '
                    'does not exist.<br>(or at least it has not yet been discovered...)\n')
-        html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
     else:
         if skin_type == "":
             output = ''
             for animal_obj in animals_data:
                 output += serialize_animal(animal_obj)
-            html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
-            with open(OUTPUT_HTML_PATH, "w") as handle:
-                handle.write(html_with_data)
         else:
             output = ''
             for animal_obj in animals_data:
                 if animal_obj.get("characteristics").get("skin_type") == skin_type:
                     output += serialize_animal(animal_obj)
-            html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
+    html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
     with open(OUTPUT_HTML_PATH, "w") as handle:
         handle.write(html_with_data)
 
