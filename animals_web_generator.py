@@ -32,79 +32,72 @@ def serialize_animal(animal_obj):
     :param animal_obj: information to use for card element
     :return: HTML code for card element
     """
-    output = ''
-    output += '<li class="cards__item">\n'
-    output += f'<div class="card__title" style="margin: 20;">{animal_obj.get("name")}</div>\n'
-    output += '<div class="card__text">\n'
-    output += '<ul style="list-style-type:none;">\n'
+    output = ['<li class="cards__item">\n',
+              f'<div class="card__title" style="margin: 20;">{animal_obj.get("name")}</div>\n',
+              '<div class="card__text">\n',
+              '<ul style="list-style-type:none;">\n'
+              ]
     locations = animal_obj.get('locations')
     if locations:
-        output += f'<li><strong>Location:</strong> {locations[0]}</li>\n'
+        output.append(f'<li><strong>Location:</strong> {locations[0]}</li>\n')
     if animal_obj.get('characteristics'):
         habitat = animal_obj.get('characteristics').get('habitat')
         if habitat:
-            output += f'<li><strong>Habitat:</strong> {habitat}</li>\n'
+            output.append(f'<li><strong>Habitat:</strong> {habitat}</li>\n')
         diet = animal_obj['characteristics'].get('diet')
         if diet:
-            output += f'<li><strong>Diet:</strong> {diet}</li>\n'
+            output.append(f'<li><strong>Diet:</strong> {diet}</li>\n')
         animal_type = animal_obj.get('characteristics').get('type')
         if animal_type:
-            output += f'<li><strong>Type:</strong> {animal_type}</li>\n'
+            output.append(f'<li><strong>Type:</strong> {animal_type}</li>\n')
         skin_type = animal_obj.get('characteristics').get('skin_type')
         if skin_type:
-            output += f'<li><strong>Skin:</strong> {skin_type}</li>\n'
+            output.append(f'<li><strong>Skin:</strong> {skin_type}</li>\n')
         color = animal_obj.get('characteristics').get('color')
         if color:
-            output += f'<li><strong>Color:</strong> {color}</li>\n'
-        output += '</ul>\n'
-        output += '</div>\n'
-        output += '</li>\n'
-    return output
+            output.append(f'<li><strong>Color:</strong> {color}</li>\n')
+    output.append('</ul>\n')
+    output.append('</div>\n')
+    output.append('</li>\n')
+    output_as_string = "".join(output)
+    return output_as_string
 
 
-def select_skin_type(animals_info):
+def select_skin_type(skin_types):
     """
     Let user decide which animals should appear on the website.
-    :param animals_info: information about all animals
+    :param skin_types: available skin types of chosen animal
     :return: selected skin type
     """
-    skin_types = list(set([animal["characteristics"].get("skin_type") for animal in animals_info
-                           if animal.get("characteristics")]))
     if None in skin_types:
         skin_types.remove(None)
     while True:
-        skin_type = input(f"Choose between {skin_types} or leave blank for all animals: ").capitalize().strip()
+        skin_type = input(f"Choose between {skin_types} or leave blank for all animals: ").title().strip()
         if skin_type in skin_types or skin_type == "":
             return skin_type
         else:
             print("Please select an available type.")
 
 
-def create_html_file(animal_name, skin_type, animals_data):
+def create_html_file(skin_type, animals_data):
     """
     Generate HTML file based on user choice.
-    :param animal_name: animal the data is about
     :param animals_data: information to use for HTML file (data from API in JSON format)
     :param skin_type: type selected by user
     """
     template = load_template(TEMPLATE_PATH)
-    if not animals_data:
-        output = ''
-        output += '<li class="cards__item">\n'
-        output += '<div class="card__title">OOOPS!</div>\n'
-        output += (f'<div class="card__text">The animal "{animal_name}" '
-                   'does not exist.<br>(or at least it has not yet been discovered...)\n')
+    if skin_type == "":
+        output = []
+        for animal_obj in animals_data:
+            output.append(serialize_animal(animal_obj))
     else:
-        if skin_type == "":
-            output = ''
-            for animal_obj in animals_data:
-                output += serialize_animal(animal_obj)
-        else:
-            output = ''
-            for animal_obj in animals_data:
+        output = []
+        for animal_obj in animals_data:
+            if animal_obj.get("characteristics"):
                 if animal_obj.get("characteristics").get("skin_type") == skin_type:
-                    output += serialize_animal(animal_obj)
-    html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output)
+                    output.append(serialize_animal(animal_obj))
+    output_string = "".join(output)
+    html_with_data = template.replace(PLACEHOLDER_ANIMALS_INFO, output_string)
     with open(OUTPUT_HTML_PATH, "w") as handle:
         handle.write(html_with_data)
 
@@ -114,16 +107,28 @@ def main():
     Execute the main program: greet user, get animal name and skin type input and generate HTML file accordingly.
     """
     print("\nWelcome to your Animal Repository Generator!\n")
-    print("Which animal should your website be about?")
-    animal_input = get_animal_by_user()
-    animals_data = data_fetcher.fetch_data(animal_input)
-    if animals_data:
+    while True:
+        print("Which animal should your website be about?")
+        animal_input = get_animal_by_user()
+        try:
+            animals_data = data_fetcher.fetch_data(animal_input)
+        except ValueError:
+            print("\nInvalid API key used to fetch data! Please add a valid API key to .env file!")
+            quit()
+        if not animals_data:
+            print(f"\nThe animal '{animal_input}' doesn't exist.\n")
+            continue
+        else:
+            break
+
+    skin_types = list(set([animal["characteristics"].get("skin_type") for animal in animals_data
+                           if animal.get("characteristics")]))
+    if skin_types:
         print("\nPlease select the SKIN TYPE you want the animals on your website to have.")
-        skin_type = select_skin_type(animals_data)
+        selected_skin_type = select_skin_type(skin_types)
     else:
-        print(f"The animal '{animal_input}' doesn't exist.")
-        skin_type = ""
-    create_html_file(animal_input, skin_type, animals_data)
+        selected_skin_type = ""
+    create_html_file(selected_skin_type, animals_data)
     print("\nYour HTML file has been created!")
 
 
